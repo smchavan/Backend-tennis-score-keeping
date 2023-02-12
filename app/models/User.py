@@ -7,6 +7,8 @@ class User(db.Model):
     last_name = db.Column(db.String)
     email = db.Column(db.String)
     registered_at = db.Column(db.DateTime, default=(datetime.date.today()))
+    match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
+    player_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     players = db.relationship("Player", back_populates="user")
     matches = db.relationship("Match",back_populates="user")
 
@@ -31,10 +33,11 @@ class User(db.Model):
 
     @classmethod
     def from_dict(cls, user_data):
-        new_user = User(name=user_data["name"],
-                    description=user_data["description"],
-                    radius=user_data["radius"],
-                    num_moons=user_data["num_moons"],
-                    gravity=user_data["gravity"]
+        new_user = User(first_name=user_data["first_name"],
+                    lasr_name=user_data["last_name"],
+                    email=user_data["email"],
+                    registered_at = user_data["registered_at"],
+                    player_names=user_data["player_names"],
+                    match_names=user_data["match_names"]
                     )
         return new_user
