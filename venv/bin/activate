@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/supriya/AC2/capstones/venv"
+VIRTUAL_ENV="/Users/supriya/Backend-tennis-score-keeping/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
