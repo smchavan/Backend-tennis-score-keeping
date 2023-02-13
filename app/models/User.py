@@ -19,7 +19,7 @@ class User(db.Model):
         user_dict["last_name"] = self.last_name
         user_dict["email"] = self.email
         user_dict["registered_at"]: self.registered_at
-        
+
         player_names = []
         for player in self.players:
             player_names.append(player.first_name)
