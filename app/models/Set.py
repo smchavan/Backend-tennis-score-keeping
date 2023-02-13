@@ -2,7 +2,7 @@ from app import db
 
 class Set(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    set_number = db.Column(db.Integer)
+    set_number = db.Column(db.Integer) # Should be incremented everytime new set starts
     player_a_games_won = db.Column(db.Integer)
     player_b_games_won = db.Column(db.Integer)
     match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
