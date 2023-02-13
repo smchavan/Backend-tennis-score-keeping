@@ -9,8 +9,11 @@ class Player(db.Model):
     utr = db.Column(db.Integer, nullable=False)
     match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+    stats = db.relationship("Stat",back_populates="player")
     user = db.relationship("User", back_populates="players")
-    matches = db.relationship("Match",back_populates="player")
+    matches = db.relationship("Match",back_populates="players")
+    
     def to_dict(self):
         player_dict = {}
         player_dict["id"] = self.id

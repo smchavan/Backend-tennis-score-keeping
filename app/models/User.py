@@ -7,8 +7,7 @@ class User(db.Model):
     last_name = db.Column(db.String)
     email = db.Column(db.String)
     registered_at = db.Column(db.DateTime, default=(datetime.date.today()))
-    match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
-    player_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
+    
     players = db.relationship("Player", back_populates="user")
     matches = db.relationship("Match",back_populates="user")
 

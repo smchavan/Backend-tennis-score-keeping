@@ -5,7 +5,9 @@ class Game(db.Model):
     game_number = db.Column(db.Integer)
     player_a_score = db.Column(db.Integer)
     player_b_score = db.Column(db.Integer)
-    set_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
+
+    set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
+    
     set = db.relationship("Set",back_populates="games")
 
     def to_dict(self):

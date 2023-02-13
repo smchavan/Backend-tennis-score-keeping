@@ -5,13 +5,12 @@ class Set(db.Model):
     set_number = db.Column(db.Integer)
     player_a_gmaes_won = db.Column(db.Integer)
     player_b_gmaes_won = db.Column(db.Integer)
+
     match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
-    player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
-    player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
-    game_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
-    players = db.relationship("Player", back_populates="set")
+    
+    stat = db.relationship("Stat",back_populates="set")
     games = db.relationship("Game", back_populates="set")
-    match = db.relationship("Match",back_populates="set")
+    match = db.relationship("Match",back_populates="sets")
 
     def to_dict(self):
         set_dict = {}

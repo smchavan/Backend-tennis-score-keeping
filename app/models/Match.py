@@ -7,12 +7,15 @@ class Match(db.Model):
     no_of_gamesperset = db.Column(db.Integer)
     match_date = db.Column(db.DateTime, default=(datetime.date.today()))
     match_name = db.Column(db.String)
+
     player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
     players = db.relationship("Player", back_populates="matches")
     user = db.relationship("User",back_populates="matches")
-
+    sets = db.relationship("Set",back_populates="match")
+    
     def to_dict(self):
         match_dict = {}
         match_dict["id"] = self.id
