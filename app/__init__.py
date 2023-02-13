@@ -20,11 +20,11 @@ def create_app(test_config=None):
         app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
     
     from app.models.user import User
-    from app.models.player import Player
-    from app.models.match import Match
-    from app.models.set import Set
-    from app.models.game import Game
-    from app.models.stat import Stat
+    # from app.models.player import Player
+    # from app.models.match import Match
+    # from app.models.set import Set
+    # from app.models.game import Game
+    # from app.models.stat import Stat
 
     db.init_app(app)
     migrate.init_app(app, db)

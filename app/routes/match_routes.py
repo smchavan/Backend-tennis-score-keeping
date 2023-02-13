@@ -10,5 +10,5 @@ from app.routes.routes_helper import validate_model
 
 matchs_bp = Blueprint("matchs_bp", __name__, url_prefix="/matchs")
 
-## `POST /matchs`
-#@matchs_bp.route("/matchs", methods=["POST"])
+# ## `POST /matchs`
+# #@matchs_bp.route("/matchs", methods=["POST"])

@@ -14,6 +14,8 @@ def validate_model(cls, model_id):
     return model
 
     #  return True if its a valid number, return False it's not a number
+    # TODO: Kelsey mentioned looking at documentation so see if validation of nums is already handled
+    # Maybe: Delete
 def validate_num_queries(query_param):
     try:
         query_int = int(query_param)

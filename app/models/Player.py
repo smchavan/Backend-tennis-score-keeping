@@ -7,12 +7,11 @@ class Player(db.Model):
     date_of_birth = db.Column(db.String, nullable=False)
     serve_style = db.Column(db.String, nullable=False)
     utr = db.Column(db.Integer, nullable=False)
-    match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
-    stats = db.relationship("Stat",back_populates="player")
+    # stats = db.relationship("Stat",back_populates="player")
     user = db.relationship("User", back_populates="players")
-    matches = db.relationship("Match",back_populates="players")
+    matches = db.relationship("Match", back_populates="player")
     
     def to_dict(self):
         player_dict = {}

@@ -9,12 +9,12 @@ class Stat(db.Model):
     unforced_errors = db.Column(db.Integer)
     forced_errors = db.Column(db.Integer)
     
-    set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
-    player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
-    player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
+    # set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
+    # player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
+    # player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
 
-    players = db.relationship("Player", back_populates="stats")
-    set = db.relationship("User",back_populates="stats")
+    # players = db.relationship("Player", back_populates="stats")
+    # set = db.relationship("User",back_populates="stats")
 
     def to_dict(self):
         stat_dict = {}
