@@ -22,7 +22,7 @@ class User(db.Model):
         
         player_names = []
         for player in self.players:
-            player_names.append(player.name)
+            player_names.append(player.first_name)
         user_dict["player"] = player_names
 
         match_names = []
@@ -34,7 +34,7 @@ class User(db.Model):
     @classmethod
     def from_dict(cls, user_data):
         new_user = User(first_name=user_data["first_name"],
-                    lasr_name=user_data["last_name"],
+                    last_name=user_data["last_name"],
                     email=user_data["email"],
                     registered_at = user_data["registered_at"],
                     player_names=user_data["player_names"],

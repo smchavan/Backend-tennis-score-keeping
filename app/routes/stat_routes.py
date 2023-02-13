@@ -8,7 +8,7 @@ from app.models.game import Game
 from app.models.stat import Stat
 from app.routes.routes_helper import validate_model
 
-games_bp = Blueprint("games_bp", __name__, url_prefix="/games")
+stats_bp = Blueprint("stats_bp", __name__, url_prefix="/stats")
 
-## `POST /games`
-#@games_bp.route("/games", methods=["POST"])
+## `POST /stats`
+#@stats_bp.route("/stats", methods=["POST"])

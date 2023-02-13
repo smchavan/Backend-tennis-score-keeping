@@ -8,7 +8,7 @@ class Match(db.Model):
     match_date = db.Column(db.DateTime, default=(datetime.date.today()))
     match_name = db.Column(db.String)
     player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
-    player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
+    player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     players = db.relationship("Player", back_populates="matches")
     user = db.relationship("User",back_populates="matches")
@@ -24,7 +24,7 @@ class Match(db.Model):
         match_dict["player_b_id"]: self.player_b_id
         player_names = []
         for player in self.players:
-            player_names.append(player.name)
+            player_names.append(player.first_name)
         match_dict["player"] = player_names
 
         
