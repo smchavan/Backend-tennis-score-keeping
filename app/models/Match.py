@@ -12,8 +12,8 @@ class Match(db.Model):
     player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
-    players = db.relationship("Player", back_populates="matches")
-    user = db.relationship("User",back_populates="matches")
+    player = db.relationship("Player", back_populates="matches")
+    user = db.relationship("User", back_populates="matches")
     sets = db.relationship("Set",back_populates="match")
     
     def to_dict(self):

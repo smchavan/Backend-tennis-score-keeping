@@ -3,12 +3,11 @@ from app import db
 class Set(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     set_number = db.Column(db.Integer)
-    player_a_gmaes_won = db.Column(db.Integer)
-    player_b_gmaes_won = db.Column(db.Integer)
-
+    player_a_games_won = db.Column(db.Integer)
+    player_b_games_won = db.Column(db.Integer)
     match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
     
-    stat = db.relationship("Stat",back_populates="set")
+    # stat = db.relationship("Stat",back_populates="set")
     games = db.relationship("Game", back_populates="set")
     match = db.relationship("Match",back_populates="sets")
 
