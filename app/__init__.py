@@ -20,11 +20,12 @@ def create_app(test_config=None):
         app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
     
     from app.models.user import User
-    # from app.models.player import Player
-    # from app.models.match import Match
-    # from app.models.set import Set
-    # from app.models.game import Game
-    # from app.models.stat import Stat
+    from app.models.player import Player
+    from app.models.match import Match
+    from app.models.set import Set
+    from app.models.game import Game
+    from app.models.stat import Stat
+    from app.models.match_player import Match_player
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -47,7 +48,8 @@ def create_app(test_config=None):
     from app.routes.stat_routes import stats_bp
     app.register_blueprint(stats_bp)
 
-
+    from app.routes.match_player_routes import match_players_bp
+    app.register_blueprint(match_players_bp)
 
 
 

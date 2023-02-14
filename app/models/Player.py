@@ -1,5 +1,5 @@
 from app import db
-
+from app.models.match_player import Match_player
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String, nullable=False)
@@ -8,10 +8,11 @@ class Player(db.Model):
     serve_style = db.Column(db.String, nullable=False)
     utr = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-
-    # stats = db.relationship("Stat",back_populates="player")
+    
     user = db.relationship("User", back_populates="players")
-    matches = db.relationship("Match", back_populates="player")
+    match_players = db.relationship("Match_player", back_populates="players")
+    
+    # stats = db.relationship("Stat",back_populates="player")
     
     def to_dict(self):
         player_dict = {}

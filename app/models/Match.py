@@ -1,6 +1,6 @@
 from app import db
 import datetime
-
+from app.models.match_player import Match_player
 class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     no_of_sets = db.Column(db.Integer)
@@ -12,9 +12,22 @@ class Match(db.Model):
     player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
-    player = db.relationship("Player", back_populates="matches")
+    match_players = db.relationship("Match_player", back_populates="matches")
+
     user = db.relationship("User", back_populates="matches")
     sets = db.relationship("Set",back_populates="match")
+
+    # player_a = db.relationship(
+    #     "Player",
+    #     foreign_keys="Match.player_a_id",
+    #     back_populates="match1"
+    # )
+
+    # player_b = db.relationship(
+    #     "Player",
+    #     foreign_keys="Match.player_b_id",
+    #     back_populates="match2"
+    # )
     
     def to_dict(self):
         match_dict = {}

@@ -1,11 +1,13 @@
 from app import db
 import datetime
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     email = db.Column(db.String)
+    password = db.Column(db.String)
     registered_at = db.Column(db.DateTime, default=(datetime.date.today()))
     
     players = db.relationship("Player", back_populates="user")
@@ -17,6 +19,7 @@ class User(db.Model):
         user_dict["first_name"] = self.first_name
         user_dict["last_name"] = self.last_name
         user_dict["email"] = self.email
+        user_dict["password"] = self.password
         user_dict["registered_at"]: self.registered_at
 
         player_names = []
@@ -35,6 +38,7 @@ class User(db.Model):
         new_user = User(first_name=user_data["first_name"],
                     last_name=user_data["last_name"],
                     email=user_data["email"],
+                    password=user_data["password"],
                     registered_at = user_data["registered_at"],
                     player_names=user_data["player_names"],
                     match_names=user_data["match_names"]
