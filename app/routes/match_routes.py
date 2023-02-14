@@ -56,3 +56,41 @@ def get_all_matches():
         matches_response.append(match.to_dict())
     print("matches REsponse", matches_response)
     return jsonify(matches_response)
+
+## Get one match by id
+# Code to retrieve a single match by ID from the database and return as a JSON response
+@matchs_bp.route("/<match_id>", methods=["GET"])
+def get_match(match_id):    
+    match = validate_model(Match, match_id)
+    return match.to_dict()
+
+# Code to retrieve data from the request body, update an existing match 
+# in the database by ID, and return a JSON response
+@matchs_bp.route("/<match_id>", methods=["PUT"])
+def update_match(match_id):
+
+    match = validate_model(Match, match_id)
+    request_body = request.get_json()
+    try: 
+        match.no_of_sets=request_body["no_of_sets"],
+        match.no_of_gamesperset=request_body["no_of_gamesperset"],
+        match.match_name=request_body["match_name"],
+        match.player_a_id=request_body["player_a_id"],
+        match.player_b_id=request_body["player_b_id"],
+        match.user_id=request_body["user_id"]
+    except KeyError as key_error:
+        abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
+
+    db.session.commit()
+    match_response = match.to_dict()
+    return jsonify(match_response),200
+
+## Delete a match from the database DELETE
+# Code to delete an existing match from the database by ID and return a JSON response
+@matchs_bp.route("/<match_id>", methods=["DELETE"])
+def delete_match(match_id):
+    
+    match = validate_model(Match, match_id)
+    db.session.delete(match)
+    db.session.commit()
+    return make_response(f"match #{match.id} successfully deleted")
