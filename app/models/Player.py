@@ -23,11 +23,6 @@ class Player(db.Model):
         player_dict["serve_style"] = self.serve_style
         player_dict["utr"] = self.utr
 
-        match_names = []
-        for match in self.matches:
-            match_names.append(match.name)
-        player_dict["match"] = match_names
-
         return player_dict
 
     @classmethod
