@@ -11,15 +11,15 @@ from app.routes.routes_helper import validate_model
 ## Post or Create a new player
 # Code to retrieve data from the request body, create a new player in the database, and return a JSON response
 players_bp = Blueprint("players_bp", __name__, url_prefix="/players")
-@players_bp.route('/player', methods=['POST'])
+@players_bp.route("/player", methods=["POST"])
 def create_player():
     request_body = request.get_json()
-    new_player = Player(first_name=request_body['first_name'],
-                    last_name=request_body['last_name'],
-                    date_of_birth=request_body['date_of_birth'],
-                    serve_style=request_body['serve_style'],
-                    utr=request_body['utr'],
-                    user_id=request_body['user_id'])
+    new_player = Player(first_name=request_body["first_name"],
+                    last_name=request_body["last_name"],
+                    date_of_birth=request_body["date_of_birth"],
+                    serve_style=request_body["serve_style"],
+                    utr=request_body["utr"],
+                    user_id=request_body["user_id"])
     db.session.add(new_player)
     db.session.commit()
 
@@ -27,7 +27,7 @@ def create_player():
 
 ### Get All Players
 # Code to retrieve all players from the database and return as a JSON response
-@players_bp.route('/', methods=['GET'])
+@players_bp.route("/", methods=["GET"])
 def get_all_players():
     player_query = Player.query
     first_name_query = request.args.get("first_name")
@@ -49,14 +49,14 @@ def get_all_players():
 
 ## Get one player by id
 # Code to retrieve a single player by ID from the database and return as a JSON response
-@players_bp.route('/<player_id>', methods=['GET'])
+@players_bp.route("/<player_id>", methods=["GET"])
 def get_player(player_id):    
     player = validate_model(Player, player_id)
     return player.to_dict()
 
 # Code to retrieve data from the request body, update an existing player 
 # in the database by ID, and return a JSON response
-@players_bp.route('/<player_id>', methods=['PUT'])
+@players_bp.route("/<player_id>", methods=["PUT"])
 def update_player(player_id):
 
     player = validate_model(Player, player_id)
@@ -77,7 +77,7 @@ def update_player(player_id):
 
 ## Delete a player from the database DELETE
 # Code to delete an existing player from the database by ID and return a JSON response
-@players_bp.route('/<player_id>', methods=['DELETE'])
+@players_bp.route("/<player_id>", methods=["DELETE"])
 def delete_player(player_id):
     
     player = validate_model(Player, player_id)

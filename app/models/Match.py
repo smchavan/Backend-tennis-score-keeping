@@ -38,10 +38,12 @@ class Match(db.Model):
         match_dict["match_name"]: self.match_name
         match_dict["player_a_id"]: self.player_a_id
         match_dict["player_b_id"]: self.player_b_id
-        player_names = []
-        for player in self.players:
-            player_names.append(player.first_name)
-        match_dict["player"] = player_names
+        match_dict["user_id"]: self.user_id
+        # player_names = []
+        # for player in self.players:
+        #     player_names.append(player.first_name)
+        # match_dict["player"] = player_names
+        return match_dict
 
         
     @classmethod
@@ -52,7 +54,7 @@ class Match(db.Model):
                     player_b_id=match_data["player_b_id"],
                     match_date = match_data["match_date"],
                     match_name=match_data["match_name"],
-                    player_names=match_data["player_names"]
+                    # player_names=match_data["player_names"]
                     
                     )
         return new_match

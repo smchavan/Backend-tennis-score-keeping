@@ -20,7 +20,7 @@ class User(db.Model):
         user_dict["last_name"] = self.last_name
         user_dict["email"] = self.email
         user_dict["password"] = self.password
-        user_dict["registered_at"]: self.registered_at
+        user_dict["registered_at"]= self.registered_at
 
         player_names = []
         for player in self.players:
@@ -29,7 +29,7 @@ class User(db.Model):
 
         match_names = []
         for match in self.matches:
-            match_names.append(match.name)
+            match_names.append(match.match_name)
         user_dict["match"] = match_names
         return user_dict
 

@@ -21,7 +21,7 @@ def create_user():
                     last_name=request_body["last_name"],
                     email=request_body["email"],
                     password=request_body["password"],
-                    #registered_at = request_body["registered_at"],
+                    #registered_at = datetime.now()
                     #player_names=request_body["player_names"],
                     #match_names=request_body["match_names"]
                     )
