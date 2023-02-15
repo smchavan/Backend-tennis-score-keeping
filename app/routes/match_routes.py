@@ -54,7 +54,7 @@ def get_all_matches():
     for match in matches:
         print("match", match)
         matches_response.append(match.to_dict())
-    print("matches REsponse", matches_response)
+    print("matches Response", matches_response)
     return jsonify(matches_response)
 
 ## Get one match by id

@@ -3,8 +3,8 @@ from app import db
 class Set(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     set_number = db.Column(db.Integer) # Should be incremented everytime new set starts
-    player_a_games_won = db.Column(db.Integer)
-    player_b_games_won = db.Column(db.Integer)
+    player_a_games_won = db.Column(db.Integer,default=0)
+    player_b_games_won = db.Column(db.Integer,default=0)
     match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
     
     # stat = db.relationship("Stat",back_populates="set")
@@ -15,14 +15,10 @@ class Set(db.Model):
         set_dict = {}
         set_dict["id"] = self.id
         set_dict["set_number"] = self.set_number
-        set_dict["player_a_gmaes_won"] = self.player_a_gmaes_won
-        set_dict["player_b_gmaes_won"] = self.player_b_gmaes_won
+        set_dict["player_a_games_won"] = self.player_a_games_won
+        set_dict["player_b_games_won"] = self.player_b_games_won
+        set_dict["match_id"] = self.match_id
         
-        
-        player_names = []
-        for player in self.players:
-            player_names.append(player.name)
-        set_dict["player"] = player_names
 
         games_ids = []
         for game in self.games:
@@ -33,15 +29,8 @@ class Set(db.Model):
     @classmethod
     def from_dict(cls, set_data):
         new_set = Set(set_number=set_data["set_number"],
-                    player_a_gmaes_won=set_data["player_a_gmaes_won"],
-                    player_b_gmaes_won=set_data["player_b_gmaes_won"],                    
-                    registered_at = set_data["registered_at"],
-                    player_names=set_data["player_names"],
+                    player_a_games_won=set_data["player_a_games_won"],
+                    player_b_games_won=set_data["player_b_games_won"],                    
                     games_ids=set_data["gmaes_ids"]
                     )
         return new_set
-# id = pk
-# set_number
-# player_a_games_won
-# player_b_games_won
-# match_id = FK 
