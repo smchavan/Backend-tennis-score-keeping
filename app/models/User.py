@@ -40,7 +40,7 @@ class User(db.Model):
                     email=user_data["email"],
                     password=user_data["password"],
                     registered_at = user_data["registered_at"],
-                    player_names=user_data["player_names"],
-                    match_names=user_data["match_names"]
+                    # player_names=user_data["player_names"],
+                    # match_names=user_data["match_names"]
                     )
         return new_user
