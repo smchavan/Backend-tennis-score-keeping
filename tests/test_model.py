@@ -72,9 +72,8 @@ def test_from_dict_returns_planet():
         "last_name":USER_LAST_NAME2,
         "email":USER_EMAIL2,
         "password": USER_PASSWORD2,
-        "registered_at":"sadsadsad",
-        # "player_names": [],
-        # "match_names": []
+        "registered_at":"sadsadsad"
+        
     }
     # Act
     result = User.from_dict(new_user2)
