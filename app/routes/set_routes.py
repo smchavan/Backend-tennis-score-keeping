@@ -32,14 +32,14 @@ def get_all_sets():
     set_query = Set.query
     set_number_query = request.args.get("set_number")
     if set_number_query:
-        set_query = set_query.filter(Set.first_name.ilike(f"%{set_number_query}%"))
+        set_query = set_query.filter(Set.set_number.ilike(f"%{set_number_query}%"))
         
     sort_query = request.args.get("sort")
     if sort_query:
         if sort_query == "desc":
-            set_query = set_query.order_by(Set.first_name.desc())
+            set_query = set_query.order_by(Set.set_number.desc())
         else:
-            set_query = set_query.order_by(Set.first_name.asc())
+            set_query = set_query.order_by(Set.set_number.asc())
 
     sets = set_query.all()
     print(sets)
@@ -85,4 +85,4 @@ def delete_set(set_id):
     set = validate_model(Set, set_id)
     db.session.delete(set)
     db.session.commit()
-    return make_response(f"set #{set.id} successfully deleted")
+    return make_response(f"Set #{set.id} successfully deleted")

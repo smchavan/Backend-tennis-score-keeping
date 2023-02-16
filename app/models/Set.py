@@ -7,7 +7,7 @@ class Set(db.Model):
     player_b_games_won = db.Column(db.Integer,default=0)
     match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
     
-    # stat = db.relationship("Stat",back_populates="set")
+    stats = db.relationship("Stat",back_populates="set")
     games = db.relationship("Game", back_populates="set")
     match = db.relationship("Match",back_populates="sets")
 

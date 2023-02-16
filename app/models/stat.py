@@ -8,13 +8,12 @@ class Stat(db.Model):
     double_faults = db.Column(db.Integer)
     unforced_errors = db.Column(db.Integer)
     forced_errors = db.Column(db.Integer)
+    player_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
+    set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
     
-    # set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
-    # player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
-    # player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
 
-    # players = db.relationship("Player", back_populates="stats")
-    # set = db.relationship("User",back_populates="stats")
+    player = db.relationship("Player", back_populates="stats")
+    set = db.relationship("Set",back_populates="stats")
 
     def to_dict(self):
         stat_dict = {}
@@ -28,10 +27,10 @@ class Stat(db.Model):
         stat_dict["player_a_id"]: self.player_a_id
         stat_dict["player_b_id"]: self.player_b_id
 
-        player_names = []
-        for player in self.players:
-            player_names.append(player.first_name)
-        stat_dict["player"] = player_names
+        # player_names = []
+        # for player in self.players:
+        #     player_names.append(player.first_name)
+        # stat_dict["player"] = player_names
 
         
     @classmethod
