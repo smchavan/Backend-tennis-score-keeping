@@ -17,6 +17,68 @@ We will focus on creating RESTful endpoints for CRUD operations.
 - Add configuration, such as registering blueprints or configuring databases, in `app/__init__.py`
 - Commit and push often
 
+## One-Time Project Setup
+
+Follow these directions once, a the beginning of your project:
+
+1. Navigate to your projects folder named `projects`
+
+```bash
+$ cd ~/Developer/projects
+```
+
+2. In Github click on the "Fork" button in github and fork the repository to your Github account.  This will make a copy of the project in your github account. 
+
+![Fork Button](images/fork.png)
+
+3. "Clone" (download a copy of this project) into your projects folder. This command makes a new folder called `viewing-party`, and then puts the project into this new folder.  Make sure you are cloning from your copy of the project and not the class version (ada-cX).
+
+```bash
+$ git clone ...
+```
+
+Use `ls` to confirm there's a new project folder
+
+4. Move your location into this project folder
+
+```bash
+$ cd viewing-party
+```
+
+5. Create a virtual environment named `venv` for this project:
+
+```bash
+$ python3 -m venv venv
+```
+
+6. Activate this environment:
+
+```bash
+$ source venv/bin/activate
+```
+
+Verify that you're in a python3 virtual environment by running:
+
+- `$ python --version` should output a Python 3 version
+- `$ pip --version` should output that it is working with Python 3
+
+7. Install dependencies once at the beginning of this project with
+
+```bash
+# Must be in activated virtual environment
+$ pip install -r requirements.txt
+```
+
+Summary of one-time project setup:
+
+- [ ] `cd` into your `projects` folder
+- [ ] Clone the project onto your machine
+- [ ] `cd` into the `viewing-party` folder
+- [ ] Create the virtual environment `venv`
+- [ ] Activate the virtual environment `venv`
+- [ ] Install the dependencies with `pip`
+
+
 ## Github Setup
 
 1. Choose one member to fork the Solar System API repo 
