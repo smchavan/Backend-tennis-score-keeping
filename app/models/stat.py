@@ -19,30 +19,25 @@ class Stat(db.Model):
         stat_dict = {}
         stat_dict["id"] = self.id
         stat_dict["set_id"] = self.set_id
+        stat_dict["player_id"]= self.player_id
         stat_dict["aces"] = self.aces
         stat_dict["winners"] = self.winners
         stat_dict["double_faults"] = self.double_faults
-        stat_dict["unforced_errors"]: self.unforced_errors
-        stat_dict["forced_errors"]: self.forced_errors
-        stat_dict["player_a_id"]: self.player_a_id
-        stat_dict["player_b_id"]: self.player_b_id
-
-        # player_names = []
-        # for player in self.players:
-        #     player_names.append(player.first_name)
-        # stat_dict["player"] = player_names
+        stat_dict["unforced_errors"]= self.unforced_errors
+        stat_dict["forced_errors"]= self.forced_errors
+        
+        return stat_dict
+        
 
         
     @classmethod
     def from_dict(cls, stat_data):
-        new_stat = Stat(aces=stat_data["aces"],
-                    winners=stat_data["winners"],
-                    double_faults = stat_data["double_faults"],
-                    unforced_errors=stat_data["unforced_errors"],
-                    forced_errors=stat_data["forced_errors"],
-                    player_a_id=stat_data["player_a_id"],
-                    player_b_id=stat_data["player_b_id"],                    
-                    player_names=stat_data["player_names"]
-                    
+        new_stat = Stat(set_id=stat_data["set_id"],
+                        player_id=stat_data["player_id"],
+                        aces=stat_data["aces"],
+                        winners=stat_data["winners"],
+                        double_faults = stat_data["double_faults"],
+                        unforced_errors=stat_data["unforced_errors"],
+                        forced_errors=stat_data["forced_errors"]
                     )
         return new_stat
