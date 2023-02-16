@@ -140,6 +140,33 @@ def second_match(app):
     db.session.add(new_match2)
     db.session.commit()
 
+@pytest.fixture
+def user():
+    user = User(username="test_user", email="test_user@example.com", password="test_password")
+    db.session.add(user)
+    db.session.commit()
+    return user
+
+@pytest.fixture
+def player():
+    player = Player(firstname="John", lastname="Doe", email="johndoe@example.com")
+    db.session.add(player)
+    db.session.commit()
+    return player
+
+@pytest.fixture
+def match(user, player):
+    match = Match(
+        no_of_sets=3,
+        no_of_gamesperset=6,
+        match_name="test_match",
+        player_a_id=player.id,
+        player_b_id=player.id,
+        user_id=user.id
+    )
+    db.session.add(match)
+    db.session.commit()
+    return match
 
 
 
