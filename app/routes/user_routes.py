@@ -92,3 +92,80 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return make_response(f"User #{user.id} successfully deleted")
+##************************************************************************
+# ******************NESTED ROUTES FOR USER MODEL**************************
+
+### CREATE a MATCH from user dashboard
+#### POST 
+
+@users_bp.route("/<user_id>/match", methods=["POST"])
+def add_new_match_to_user(user_id):
+    user = validate_model(User, user_id)
+
+    request_body = request.get_json()
+    print("request Body",request_body)
+    new_match = Match(
+            no_of_sets=request_body["no_of_sets"],
+            no_of_gamesperset=request_body["no_of_gamesperset"],
+            #match_date=datetime.now(),
+            match_name=request_body["match_name"],
+            player_a_id=request_body["player_a_id"],
+            player_b_id=request_body["player_b_id"],
+            user_id=user_id
+        )
+    #new_match = Match.from_dict(request_body)
+    
+    new_match.user = user
+    print("new_match",new_match)
+    db.session.add(new_match)
+    db.session.commit()
+
+    message = f"Match {new_match.match_name} created with User{user.first_name}"
+    return make_response(jsonify(message), 201)
+
+### CREATE a PLAYER from user dashboard
+#### POST 
+
+@users_bp.route("/<user_id>/player", methods=["POST"])
+def add_new_player_to_user(user_id):
+    user = validate_model(User, user_id)
+
+    request_body = request.get_json()
+    new_player = Player(first_name=request_body["first_name"],
+                    last_name=request_body["last_name"],
+                    date_of_birth=request_body["date_of_birth"],
+                    serve_style=request_body["serve_style"],
+                    utr=request_body["utr"],
+                    user_id=user_id)
+    
+    new_player.user = user
+    print("new_player",new_player)
+    db.session.add(new_player)
+    db.session.commit()
+    message = f"Player {new_player.first_name} created with User{user.first_name}"
+    return make_response(jsonify(message), 201)
+
+
+### Get All Matches for a certain user who has created those
+# Code to retrieve all matches from the database and return as a JSON response
+@users_bp.route('/<user_id>/matches', methods=['GET'])
+def get_all_matches_for_the_use(user_id):
+    user = validate_model(User,user_id)
+
+    matches_response = []
+    for match in user.matches:
+        print("match", match)
+        matches_response.append(match.to_dict())
+    print("matches Response", matches_response)
+    return jsonify(matches_response)
+
+@users_bp.route('/<user_id>/players', methods=['GET'])
+def get_all_players_for_the_use(user_id):
+    user = validate_model(User,user_id)
+
+    players_response = []
+    for player in user.players:
+        print("player", player)
+        players_response.append(player.to_dict())
+    print("matches Response", players_response)
+    return jsonify(players_response)

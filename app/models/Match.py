@@ -35,10 +35,10 @@ class Match(db.Model):
         match_dict["no_of_sets"] = self.no_of_sets
         match_dict["no_of_gamesperset"] = self.no_of_gamesperset
         match_dict["match_date"] = self.match_date
-        match_dict["match_name"]: self.match_name
-        match_dict["player_a_id"]: self.player_a_id
-        match_dict["player_b_id"]: self.player_b_id
-        match_dict["user_id"]: self.user_id
+        match_dict["match_name"]= self.match_name
+        match_dict["player_a_id"]= self.player_a_id
+        match_dict["player_b_id"]= self.player_b_id
+        match_dict["user_id"]= self.user_id
         # player_names = []
         # for player in self.players:
         #     player_names.append(player.first_name)

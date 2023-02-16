@@ -18,7 +18,7 @@ def test_create_player(client, app):
         "last_name": "Doe",
         "date_of_birth": "1990-01-01",
         "serve_style": "Right-handed",
-        "utr": "5.0",
+        "utr": 5.0,
         "user_id": 1
     }
     response = client.post("/players/player", json=player_data)
@@ -89,7 +89,7 @@ def test_update_player(client, app):
     assert json.loads(response.get_data(as_text=True))["first_name"] == "Jane"
 
 def test_delete_player(client):
-    player = Player(first_name="John", last_name="Doe", email="john.doe@example.com", password="password")
+    player = Player(first_name="John", last_name="Doe", date_of_birth = "1990-01-01", serve_style= "Right-handed",utr = 5.0,user_id = 1)
     db.session.add(player)
     db.session.commit()
     player_id = response.get_data(as_text=True).split("#")[-1]
