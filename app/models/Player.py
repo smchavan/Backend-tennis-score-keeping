@@ -11,8 +11,7 @@ class Player(db.Model):
     
     user = db.relationship("User", back_populates="players")
     match_players = db.relationship("Match_player", back_populates="players")
-    
-    # stats = db.relationship("Stat",back_populates="player")
+    stats = db.relationship("Stat",back_populates="player")
     
     def to_dict(self):
         player_dict = {}
