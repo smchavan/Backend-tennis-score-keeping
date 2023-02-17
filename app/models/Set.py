@@ -19,20 +19,15 @@ class Set(db.Model):
         set_dict["player_b_games_won"] = self.player_b_games_won
         set_dict["match_id"] = self.match_id
         set_dict["set_winner"] = self.set_winner
-        
-
-        # games_ids = []
-        # for game in self.games:
-        #     games_ids.append(game.id)
-        # set_dict["games"] = games_ids
         return set_dict
+
 
     @classmethod
     def from_dict(cls, set_data):
         new_set = Set(set_number=set_data["set_number"],
                     player_a_games_won=set_data["player_a_games_won"],
                     player_b_games_won=set_data["player_b_games_won"],                    
-                    games_ids=set_data["games_ids"],
-                    set_winner=set_data["set_winner"]
+                    set_winner=set_data["set_winner"],
+                    match_id=set_data["match_id"]
                     )
         return new_set
