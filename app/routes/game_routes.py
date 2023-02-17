@@ -62,13 +62,16 @@ def update_game(game_id):
 
     game = validate_model(Game, game_id)
     request_body = request.get_json()
+    
     try: 
-        game.game_number=request_body["game_number"],
-        game.player_a_score=request_body["player_a_score"],
-        game.player_b_score=request_body["player_b_score"],                    
-        game.set_id=request_body["set_id"],
-        game.game_winner=request_body["game_winner"]
-        #game.game_winner=game_done_and_update_related_models(game)  #request_body["game_winner"] # 
+        game.game_number=request_body["game_number"]
+        game.player_a_score=request_body["player_a_score"]
+        game.player_b_score=request_body["player_b_score"]                    
+        game.set_id=request_body["set_id"]
+        print("game_set_id",game.set_id)
+
+        #game.game_winner=request_body["game_winner"]
+        game.game_winner=game_done_game_winner(game)  #request_body["game_winner"] # 
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
     
@@ -88,7 +91,7 @@ def delete_game(game_id):
     db.session.commit()
     return make_response(f"Game #{game.id} successfully deleted")
 
-def game_done_and_update_related_models(game):
+def game_done_game_winner(game):
     set_id = game.set_id
     print("set_id",set_id)
     cur_set = validate_model(Set, set_id)
@@ -113,3 +116,6 @@ def game_done_and_update_related_models(game):
         return player_b_name 
 
 
+
+def update_set_after_game(set_to_updat):
+    pass
