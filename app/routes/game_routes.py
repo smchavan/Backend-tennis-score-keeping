@@ -68,11 +68,13 @@ def update_game(game_id):
         game.player_b_score=request_body["player_b_score"],                    
         game.set_id=request_body["set_id"],
         game.game_winner=request_body["game_winner"]
+        #game.game_winner=game_done_and_update_related_models(game)  #request_body["game_winner"] # 
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
-
+    
     db.session.commit()
     game_response = game.to_dict()
+    #print("game_response.game_winner",game_response.game_winner)
     return jsonify(game_response),200
 
 
@@ -86,5 +88,28 @@ def delete_game(game_id):
     db.session.commit()
     return make_response(f"Game #{game.id} successfully deleted")
 
-def game_won():
-    pass
+def game_done_and_update_related_models(game):
+    set_id = game.set_id
+    print("set_id",set_id)
+    cur_set = validate_model(Set, set_id)
+    print("cur_set",cur_set)
+    match_id = cur_set.match_id
+    print("match_id",match_id)
+    cur_match = validate_model(Match,match_id)
+
+    if game.player_a_score == 4 and game.player_b_score <= 3:        
+        player_a_id = cur_match.player_a_id
+
+        cur_player1 = validate_model(Player,player_a_id)
+        player_a_name = cur_player1.first_name
+        game.game_winner = player_a_name
+        return player_a_name
+    if game.player_b_score == 4 and game.player_a_score <= 3:
+        player_b_id = cur_match.player_a_id
+        cur_player1 = validate_model(Player,player_b_id)
+        player_b_name = cur_player1.first_name
+        print("player_a_name",player_a_name)
+        game.game_winner = player_b_name
+        return player_b_name 
+
+
