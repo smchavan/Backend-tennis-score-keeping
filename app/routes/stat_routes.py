@@ -23,7 +23,8 @@ def create_stat():
             winners=request_body["winners"],
             double_faults=request_body["double_faults"],
             unforced_errors=request_body["unforced_errors"],
-            forced_errors=request_body["forced_errors"]
+            forced_errors=request_body["forced_errors"],
+            set_won=request_body["set_won"]
         )
     db.session.add(new_stat)
     db.session.commit()
@@ -35,16 +36,16 @@ def create_stat():
 @stats_bp.route('/', methods=['GET'])
 def get_all_stats():
     stat_query = Stat.query
-    stat_player_id_query = request.args.get("player_id")
-    if stat_player_id_query:
-        stat_query = stat_query.filter(Stat.stat_name.ilike(f"%{stat_player_id_query}%"))
+    # stat_player_id_query = request.args.get("player_id")
+    # if stat_player_id_query:
+    #     stat_query = stat_query.filter(Stat.stat_player_id.ilike(f"%{stat_player_id_query}%"))
         
-    sort_query = request.args.get("sort")
-    if sort_query:
-        if sort_query == "desc":
-            stat_query = stat_query.order_by(Stat.stat_name.desc())
-        else:
-            stat_query = stat_query.order_by(Stat.stat_name.asc())
+    # sort_query = request.args.get("sort")
+    # if sort_query:
+    #     if sort_query == "desc":
+    #         stat_query = stat_query.order_by(Stat.stat_name.desc())
+    #     else:
+    #         stat_query = stat_query.order_by(Stat.stat_name.asc())
     
     stats = stat_query.all()
     print("stats", stats)
@@ -78,6 +79,7 @@ def update_stat(stat_id):
         stat.double_faults = request_body["double_faults"]
         stat.unforced_errors = request_body["unforced_errors"]
         stat.forced_errors = request_body["forced_errors"]
+        stat.set_won = request_body["set_won"]
         
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
@@ -95,3 +97,4 @@ def delete_stat(stat_id):
     db.session.delete(stat)
     db.session.commit()
     return make_response(f"Stat #{stat.id} successfully deleted")
+

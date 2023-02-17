@@ -158,7 +158,8 @@ def get_all_matches_for_the_use(user_id):
         matches_response.append(match.to_dict())
     print("matches Response", matches_response)
     return jsonify(matches_response)
-
+### Get All Players for a certain user who has created those
+# Code to retrieve all players from the database and return as a JSON response
 @users_bp.route('/<user_id>/players', methods=['GET'])
 def get_all_players_for_the_use(user_id):
     user = validate_model(User,user_id)

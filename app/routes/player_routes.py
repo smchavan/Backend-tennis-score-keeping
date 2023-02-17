@@ -84,3 +84,18 @@ def delete_player(player_id):
     db.session.delete(player)
     db.session.commit()
     return make_response(f"Player #{player.id} successfully deleted")
+##***************************************************************************************
+##*****************************NESTED ROUTES FOR GETTING STATS OF THE PLAYER ************
+
+### Get All Stats for a certain player who has created those
+# Code to retrieve all matches from the database and return as a JSON response
+@players_bp.route('/<player_id>/stats', methods=['GET'])
+def get_all_stats_for_the_player(player_id):
+    player = validate_model(Player,player_id)
+
+    stats_response = []
+    for stat in player.stats:
+        print("stat", stat)
+        stats_response.append(stat.to_dict())
+    print("stats Response", stats_response)
+    return jsonify(stats_response)
