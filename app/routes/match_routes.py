@@ -26,7 +26,9 @@ def create_match():
             player_a_id=request_body["player_a_id"],
             player_b_id=request_body["player_b_id"],
             user_id=request_body["user_id"],
-            match_winner = request_body["match_winner"]
+            match_winner = request_body["match_winner"],
+            player_a_sets_won = request_body["player_a_sets_won"],
+            player_b_sets_won = request_body["player_a_sets_won"]
         )
     db.session.add(new_match)
     db.session.commit()
@@ -79,7 +81,10 @@ def update_match(match_id):
         match.player_a_id=request_body["player_a_id"],
         match.player_b_id=request_body["player_b_id"],
         match.user_id=request_body["user_id"],
-        match.match_winner = request_body["match_winner"]
+        match.match_winner = request_body["match_winner"],
+        match.player_a_sets_won = request_body["player_a_sets_won"],
+        match.player_a_sets_won = request_body["player_a_sets_won"]
+
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
 

@@ -8,7 +8,8 @@ class Match(db.Model):
     match_date = db.Column(db.DateTime, default=(datetime.date.today()))
     match_name = db.Column(db.String)
     match_winner = db.Column(db.String)
-
+    player_a_sets_won = db.Column(db.Integer)
+    player_b_sets_won = db.Column(db.Integer)
     player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False) # Make sure they are Unique in player id
     player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -40,6 +41,8 @@ class Match(db.Model):
         match_dict["player_a_id"]= self.player_a_id
         match_dict["player_b_id"]= self.player_b_id
         match_dict["user_id"]= self.user_id
+        match_dict["player_a_sets_won"] = self.player_a_sets_won
+        match_dict["player_b_sets_won"] = self.player_b_sets_won
         match_dict["match_winner"] = self.match_winner
         #player_names = []
         # for player in self.players:
@@ -57,6 +60,8 @@ class Match(db.Model):
                     player_b_id=match_data["player_b_id"],
                     match_date = match_data["match_date"],
                     match_name=match_data["match_name"],
-                    match_winner=match_data["match_winner"]                    
+                    match_winner=match_data["match_winner"],
+                    player_a_sets_won=match_data["player_a_sets_won"],
+                    player_b_sets_won=match_data["player_b_sets_won"]                     
                     )
         return new_match
