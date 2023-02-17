@@ -14,7 +14,10 @@ games_bp = Blueprint("games_bp", __name__, url_prefix="/games")
 def create_game():
     request_body = request.get_json()
     new_game = Game(game_number=request_body["game_number"],
-                set_id=request_body["set_id"]
+                set_id=request_body["set_id"],
+                player_a_score=request_body["player_a_score"],
+                player_b_score=request_body["player_b_score"],                    
+                game_winner=request_body["game_winner"]
     )
     db.session.add(new_game)
     db.session.commit()
@@ -64,6 +67,7 @@ def update_game(game_id):
         game.player_a_score=request_body["player_a_score"],
         game.player_b_score=request_body["player_b_score"],                    
         game.set_id=request_body["set_id"]
+        game.game_winner=request_body["game_winner"]
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
 

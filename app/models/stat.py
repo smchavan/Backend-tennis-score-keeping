@@ -10,7 +10,7 @@ class Stat(db.Model):
     forced_errors = db.Column(db.Integer)
     player_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
-    
+    set_won = db.Column(db.Boolean)
 
     player = db.relationship("Player", back_populates="stats")
     set = db.relationship("Set",back_populates="stats")
@@ -25,7 +25,7 @@ class Stat(db.Model):
         stat_dict["double_faults"] = self.double_faults
         stat_dict["unforced_errors"]= self.unforced_errors
         stat_dict["forced_errors"]= self.forced_errors
-        
+        stat_dict["set_won"] = self.set_won
         return stat_dict
         
 
@@ -36,8 +36,9 @@ class Stat(db.Model):
                         player_id=stat_data["player_id"],
                         aces=stat_data["aces"],
                         winners=stat_data["winners"],
-                        double_faults = stat_data["double_faults"],
+                        double_faults=stat_data["double_faults"],
                         unforced_errors=stat_data["unforced_errors"],
-                        forced_errors=stat_data["forced_errors"]
+                        forced_errors=stat_data["forced_errors"],
+                        set_won=stat_data["set_won"] 
                     )
         return new_stat
