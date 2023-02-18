@@ -18,11 +18,11 @@ sets_bp = Blueprint("sets_bp", __name__, url_prefix="/sets")
 def create_set():
     request_body = request.get_json()
     new_set = Set(set_number=request_body["set_number"],
-                match_id=request_body["match_id"],
-                player_a_games_won = request_body["player_a_games_won"],
-                player_b_games_won= request_body["player_b_games_won"],
-                set_winner = request_body["set_winner"]
-    )
+                match_id=request_body["match_id"])
+    #             player_a_games_won = request_body["player_a_games_won"],
+    #             player_b_games_won= request_body["player_b_games_won"],
+    #             set_winner = request_body["set_winner"]
+
     db.session.add(new_set)
     db.session.commit()
 

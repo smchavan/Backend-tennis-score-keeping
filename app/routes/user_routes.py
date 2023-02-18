@@ -120,8 +120,8 @@ def add_new_match_to_user(user_id):
     db.session.add(new_match)
     db.session.commit()
 
-    message = f"Match {new_match.match_name} created with User{user.first_name}"
-    return make_response(jsonify(message), 201)
+    # message = f"Match {new_match.match_name} created with User{user.first_name}"
+    return make_response({"New_match_id":new_match.id},201)
 
 ### CREATE a PLAYER from user dashboard
 #### POST 
@@ -142,8 +142,8 @@ def add_new_player_to_user(user_id):
     print("new_player",new_player)
     db.session.add(new_player)
     db.session.commit()
-    message = f"Player {new_player.first_name} created with User{user.first_name}"
-    return make_response(jsonify(message), 201)
+    #message = f"Player {new_player.first_name} created with User{user.first_name}"
+    return make_response({"Player_id":new_player.id},201)
 
 
 ### Get All Matches for a certain user who has created those

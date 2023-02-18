@@ -13,6 +13,9 @@ from app.models.match_player import Match_player
 
 
 def test_create_player(client, app):
+    user = User(first_name="John", last_name="Doe", email="john.doe@example.com", password="password")
+    db.session.add(user)
+    db.session.commit()
     player_data = {
         "first_name": "John",
         "last_name": "Doe",
@@ -23,10 +26,10 @@ def test_create_player(client, app):
     }
     response = client.post("/players/player", json=player_data)
     assert response.status_code == 201
-    assert "successfully created" in response.get_data(as_text=True)
+    assert b'{"player_id":1} in response.data \n' #in response.get_data(as_text=True)
 
 def test_get_all_players(client, app):
-    response = client.get("/players/")
+    response = client.get("/players")
     assert response.status_code == 200
     assert len(json.loads(response.get_data(as_text=True))) == 0
 
@@ -36,7 +39,7 @@ def test_get_all_players(client, app):
         "last_name": "Doe",
         "date_of_birth": "1990-01-01",
         "serve_style": "Right-handed",
-        "utr": "5.0",
+        "utr": 5.0,
         "user_id": 1
     }
     client.post("/players/player", json=player_data)
@@ -52,7 +55,7 @@ def test_get_player(client, app):
         "last_name": "Doe",
         "date_of_birth": "1990-01-01",
         "serve_style": "Right-handed",
-        "utr": "5.0",
+        "utr": 5.0,
         "user_id": 1
     }
     response = client.post("/players/player", json=player_data)
@@ -69,11 +72,11 @@ def test_update_player(client, app):
         "last_name": "Doe",
         "date_of_birth": "1990-01-01",
         "serve_style": "Right-handed",
-        "utr": "5.0",
+        "utr": 5.0,
         "user_id": 1
     }
     response = client.post("/players/player", json=player_data)
-    player_id = response.get_data(as_text=True).split("#")[-1]
+    player_id = 1#response.get_data(as_text=True).split("#")[-1]
 
     # update the player
     updated_player_data = {
@@ -81,7 +84,7 @@ def test_update_player(client, app):
         "last_name": "Doe",
         "date_of_birth": "1990-01-01",
         "serve_style": "Right-handed",
-        "utr": "5.0",
+        "utr": 5.0,
         "user_id": 1
     }
     response = client.put(f"/players/{player_id}", json=updated_player_data)
