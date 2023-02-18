@@ -27,8 +27,8 @@ def create_user():
                     )
     db.session.add(new_user)
     db.session.commit()
-
-    return make_response(f"User {new_user.first_name} successfully created", 201)
+    return make_response({"user_id":new_user.id},201)
+    #return make_response(f"User {new_user.first_name} successfully created", 201)
 
 ## Get all users GET 
 # Code to retrieve all users from the database and return as a JSON response
