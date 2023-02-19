@@ -153,13 +153,13 @@ def update_set_match_based_on_game_score(game):
     if cur_set.set_winner == player_a_name:
         cur_match.player_a_sets_won += 1
         
-    else:
+    if cur_set.set_winner == player_b_name:
         cur_match.player_b_sets_won += 1
 
     print("Player a _sets won", cur_match.player_a_sets_won)
     print("Player b _sets won", cur_match.player_b_sets_won)
 
-    if (cur_match.player_a_sets_won + cur_match.player_b_sets_won) == cur_match.no_of_sets:
+    if (int(cur_match.player_a_sets_won or 0) + int(cur_match.player_b_sets_won or 0)) == cur_match.no_of_sets:
         cur_match.match_done = True
     else:
         cur_match.match_done = False
