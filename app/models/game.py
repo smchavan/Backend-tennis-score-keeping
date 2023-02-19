@@ -6,6 +6,7 @@ class Game(db.Model):
     player_a_score = db.Column(db.Integer,default=0)
     player_b_score = db.Column(db.Integer,default=0)
     game_winner = db.Column(db.String)
+    game_done = db.Column(db.Boolean,default = False)
     set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
     
     set = db.relationship("Set",back_populates="games")

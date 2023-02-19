@@ -24,7 +24,7 @@ def create_stat():
             double_faults=request_body["double_faults"],
             unforced_errors=request_body["unforced_errors"],
             forced_errors=request_body["forced_errors"],
-            set_won=request_body["set_won"]
+            #set_won=request_body["set_won"]
         )
     db.session.add(new_stat)
     db.session.commit()

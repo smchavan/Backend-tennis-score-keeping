@@ -68,8 +68,8 @@ def update_set(set_id):
     set = validate_model(Set, set_id)
     request_body = request.get_json()
     try: 
-        set.number = request_body["set_number"]
-        set.match_id = request_body["match_id"]
+        # set.number = request_body["set_number"]
+        # set.match_id = request_body["match_id"]
         set.player_a_games_won = request_body["player_a_games_won"]
         set.player_b_games_won= request_body["player_b_games_won"]
         set.set_winner = request_body["set_winner"]
@@ -99,6 +99,9 @@ def delete_set(set_id):
 def create_stat_for_player_after_set_done(set_id):
     request_body = request.get_json()
     set = validate_model(Set,set_id)
+    player = validate_model(Player,request_body["player_id"])
+    if set.set_winner == player.first_name:
+        temp_set_won = True
     new_stat = Stat(
             set_id=set_id,
             player_id=request_body["player_id"],
@@ -107,7 +110,7 @@ def create_stat_for_player_after_set_done(set_id):
             double_faults=request_body["double_faults"],
             unforced_errors=request_body["unforced_errors"],
             forced_errors=request_body["forced_errors"],
-            set_won = request_body["set_won"]
+            set_won = temp_set_won
         )
     
     new_stat.set = set

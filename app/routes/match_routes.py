@@ -25,10 +25,10 @@ def create_match():
             match_name=request_body["match_name"],
             player_a_id=request_body["player_a_id"],
             player_b_id=request_body["player_b_id"],
-            user_id=request_body["user_id"],
-            match_winner = request_body["match_winner"],
-            player_a_sets_won = request_body["player_a_sets_won"],
-            player_b_sets_won = request_body["player_a_sets_won"]
+            user_id=request_body["user_id"]
+            # match_winner = request_body["match_winner"],
+            # player_a_sets_won = request_body["player_a_sets_won"],
+            # player_b_sets_won = request_body["player_a_sets_won"]
         )
     db.session.add(new_match)
     db.session.commit()

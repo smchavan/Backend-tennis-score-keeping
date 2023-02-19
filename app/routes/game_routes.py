@@ -14,7 +14,7 @@ games_bp = Blueprint("games_bp", __name__, url_prefix="/games")
 def create_game():
     request_body = request.get_json()
     new_game = Game(game_number=request_body["game_number"],
-                set_id=request_body["set_id"],
+                set_id=request_body["set_id"]
                 #player_a_score=request_body["player_a_score"],
                 #player_b_score=request_body["player_b_score"],                    
                 #game_winner=request_body["game_winner"]
