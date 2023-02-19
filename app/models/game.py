@@ -19,6 +19,7 @@ class Game(db.Model):
         game_dict["player_b_score"] = self.player_b_score
         game_dict["set_id"] = self.set_id
         game_dict["game_winner"] = self.game_winner
+        game_dict["game_done"] = self.game_done
         return game_dict
 
     @classmethod
@@ -27,7 +28,8 @@ class Game(db.Model):
                     player_a_score=game_data["player_a_score"],
                     player_b_score=game_data["player_b_score"],                    
                     set_id=game_data["set_id"],
-                    game_winner = game_data["game_winner"]
+                    game_winner = game_data["game_winner"],
+                    game_done = game_data["game_winner"]
                     )
         return new_game
     

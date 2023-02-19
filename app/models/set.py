@@ -21,6 +21,7 @@ class Set(db.Model):
         set_dict["player_b_games_won"] = self.player_b_games_won
         set_dict["match_id"] = self.match_id
         set_dict["set_winner"] = self.set_winner
+        set_dict["set_done"] = self.set_done
         return set_dict
 
 
@@ -30,6 +31,7 @@ class Set(db.Model):
                     player_a_games_won=set_data["player_a_games_won"],
                     player_b_games_won=set_data["player_b_games_won"],                    
                     set_winner=set_data["set_winner"],
-                    match_id=set_data["match_id"]
+                    match_id=set_data["match_id"],
+                    set_done = set_data["set_done"]
                     )
         return new_set
