@@ -101,3 +101,40 @@ def delete_match(match_id):
     db.session.delete(match)
     db.session.commit()
     return make_response(f"match #{match.id} successfully deleted")
+
+
+##***************************************NESTED ROUTES FOR CREATING SET *****************************************
+#******Create a new set with match id ***************************************************************************
+
+@matchs_bp.route("/<match_id>/set", methods=["POST"])
+def add_new_set_to_match(match_id):
+    match = validate_model(Match, match_id)
+
+    request_body = request.get_json()
+    print("request Body",request_body)
+    new_set = Set(set_number=request_body["set_number"],
+                    match_id=match_id)
+    #             player_a_games_won = request_body["player_a_games_won"],
+    #             player_b_games_won= request_body["player_b_games_won"],
+    #             set_winner = request_body["set_winner"]
+    new_set.match = match
+
+    db.session.add(new_set)
+    db.session.commit()
+
+    return make_response(f"Set1 {new_set.set_number} successfully created", 201)
+
+
+@matchs_bp.route('/<match_id>/sets', methods=['GET'])
+def get_all_sets_for_the_match(match_id):
+    match = validate_model(Match, match_id)
+    sets_response = []
+    for set in match.sets:
+        print("set", set)
+        sets_response.append(set.to_dict())
+    print("matches Response", sets_response)
+    return jsonify(sets_response)
+
+
+
+
