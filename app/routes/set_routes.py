@@ -132,3 +132,35 @@ def get_all_stats_for_the_use(set_id):
         stats_response.append(stat.to_dict())
     print("stats Response", stats_response)
     return jsonify(stats_response)
+
+
+##******************************NESTED ROUTES FOR CREATING AGAME FROM SET*************************************
+
+@sets_bp.route("/<set_id>/game", methods=["POST"])
+def add_new_game_to_set(set_id):
+    set = validate_model(Set, set_id)
+
+    request_body = request.get_json()
+    print("request Body",request_body)
+    new_game = Game(game_number=request_body["game_number"],
+                    set_id=set_id)
+    #             player_a_games_won = request_body["player_a_games_won"],
+    #             player_b_games_won= request_body["player_b_games_won"],
+    #             set_winner = request_body["set_winner"]
+    new_game.set = set
+
+    db.session.add(new_game)
+    db.session.commit()
+
+    return make_response({"Game_id":new_game.id},201)
+
+
+@sets_bp.route('/<set_id>/games', methods=['GET'])
+def get_all_games_for_the_set(set_id):
+    set = validate_model(Set, set_id)
+    games_response = []
+    for game in set.games:
+        print("game", game)
+        games_response.append(game.to_dict())
+    print("games Response", games_response)
+    return jsonify(games_response)

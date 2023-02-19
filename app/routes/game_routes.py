@@ -15,9 +15,7 @@ def create_game():
     request_body = request.get_json()
     new_game = Game(game_number=request_body["game_number"],
                 set_id=request_body["set_id"]
-                #player_a_score=request_body["player_a_score"],
-                #player_b_score=request_body["player_b_score"],                    
-                #game_winner=request_body["game_winner"]
+                
     )
     db.session.add(new_game)
     db.session.commit()
@@ -78,11 +76,12 @@ def update_game(game_id):
         #game.game_number=request_body["game_number"]
         game.player_a_score=request_body["player_a_score"]
         game.player_b_score=request_body["player_b_score"]                    
-        #game.set_id=request_body["set_id"]
+        game.set_id=request_body["set_id"]
         print("game_set_id",game.set_id)
 
         #game.game_winner=request_body["game_winner"]
         game.game_winner=game_done_game_winner(game)  #request_body["game_winner"] # 
+        game.game_done=True
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
     
@@ -141,10 +140,10 @@ def update_set_match_based_on_game_score(game):
 
     if cur_set.player_a_games_won == cur_match.no_of_gamesperset and cur_set.player_b_games_won < cur_match.no_of_gamesperset:
         cur_set.set_winner = player_a_name
-    
+        cur_set.set_done = True
     if cur_set.player_b_games_won == cur_match.no_of_gamesperset and cur_set.player_a_games_won < cur_match.no_of_gamesperset:
         cur_set.set_winner = player_b_name
-        
+        cur_set.set_done = True
     print("cur_set.set_winner",cur_set.set_winner)
 
 ### Update Match based on set winner
@@ -152,20 +151,20 @@ def update_set_match_based_on_game_score(game):
     if cur_set.set_winner == player_a_name:
         cur_match.player_a_sets_won += 1
         
-    else:
+    if cur_set.set_winner == player_b_name:
         cur_match.player_b_sets_won += 1
 
     print("Player a _sets won", cur_match.player_a_sets_won)
     print("Player b _sets won", cur_match.player_b_sets_won)
 
-    if (cur_match.player_a_sets_won + cur_match.player_b_sets_won) == cur_match.no_of_sets:
-        match_done = True
+    if (int(cur_match.player_a_sets_won or 0) + int(cur_match.player_b_sets_won or 0)) == cur_match.no_of_sets:
+        cur_match.match_done = True
     else:
-        match_done = False
-    if cur_match.player_a_sets_won > cur_match.player_b_sets_won and match_done:
+        cur_match.match_done = False
+    if cur_match.player_a_sets_won > cur_match.player_b_sets_won and cur_match.match_done:
         cur_match.match_winner = player_a_name
         
-    if cur_match.player_b_sets_won > cur_match.player_a_sets_won and match_done:
+    if cur_match.player_b_sets_won > cur_match.player_a_sets_won and cur_match.match_done:
         cur_match.match_winner = player_b_name
         
     print("cur_match.match_winner", player_b_name)
