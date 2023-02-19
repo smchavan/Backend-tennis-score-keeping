@@ -145,6 +145,7 @@ def add_new_player_to_user(user_id):
     #message = f"Player {new_player.first_name} created with User{user.first_name}"
     return make_response({"Player_id":new_player.id},201)
 
+######Edit a player 
 
 ### Get All Matches for a certain user who has created those
 # Code to retrieve all matches from the database and return as a JSON response
