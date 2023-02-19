@@ -152,7 +152,7 @@ def add_new_game_to_set(set_id):
     db.session.add(new_game)
     db.session.commit()
 
-    return make_response({"Set_id":new_game.id},201)
+    return make_response({"Game_id":new_game.id},201)
 
 
 @sets_bp.route('/<set_id>/games', methods=['GET'])
