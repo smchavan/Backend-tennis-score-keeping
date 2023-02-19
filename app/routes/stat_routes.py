@@ -36,17 +36,7 @@ def create_stat():
 @stats_bp.route('/', methods=['GET'])
 def get_all_stats():
     stat_query = Stat.query
-    # stat_player_id_query = request.args.get("player_id")
-    # if stat_player_id_query:
-    #     stat_query = stat_query.filter(Stat.stat_player_id.ilike(f"%{stat_player_id_query}%"))
-        
-    # sort_query = request.args.get("sort")
-    # if sort_query:
-    #     if sort_query == "desc":
-    #         stat_query = stat_query.order_by(Stat.stat_name.desc())
-    #     else:
-    #         stat_query = stat_query.order_by(Stat.stat_name.asc())
-    
+
     stats = stat_query.all()
     print("stats", stats)
     stats_response = []

@@ -114,11 +114,12 @@ def add_new_set_to_match(match_id):
     print("request Body",request_body)
     new_set = Set(set_number=request_body["set_number"],
                     match_id=match_id)
-    
+
     new_set.match = match
 
     db.session.add(new_set)
     db.session.commit()
+
 
     return make_response({"Set_id":new_set.id},201)
 
@@ -129,7 +130,9 @@ def get_all_sets_for_the_match(match_id):
     for set in match.sets:
         print("set", set)
         sets_response.append(set.to_dict())
+
     print("Sets Response", sets_response)
+
     return jsonify(sets_response)
 
 
