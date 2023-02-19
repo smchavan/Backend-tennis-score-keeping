@@ -8,8 +8,8 @@ class Match(db.Model):
     match_date = db.Column(db.DateTime, default=(datetime.date.today()))
     match_name = db.Column(db.String)
     match_winner = db.Column(db.String)
-    player_a_sets_won = db.Column(db.Integer)
-    player_b_sets_won = db.Column(db.Integer)
+    player_a_sets_won = db.Column(db.Integer,default=0)
+    player_b_sets_won = db.Column(db.Integer,default=0)
     player_a_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False) # Make sure they are Unique in player id
     player_b_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
