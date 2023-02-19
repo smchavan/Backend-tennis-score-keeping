@@ -5,8 +5,10 @@ class Set(db.Model):
     set_number = db.Column(db.Integer) # Should be incremented everytime new set starts
     player_a_games_won = db.Column(db.Integer,default=0)
     player_b_games_won = db.Column(db.Integer,default=0)
-    match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
     set_winner = db.Column(db.String)
+    set_done = db.Column(db.Boolean,default = False)
+    match_id = db.Column(db.Integer, db.ForeignKey("match.id"), nullable=False)
+    
     stats = db.relationship("Stat",back_populates="set")
     games = db.relationship("Game", back_populates="set")
     match = db.relationship("Match",back_populates="sets")

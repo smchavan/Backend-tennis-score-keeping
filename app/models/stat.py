@@ -10,7 +10,7 @@ class Stat(db.Model):
     forced_errors = db.Column(db.Integer)
     player_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)
     set_id = db.Column(db.Integer, db.ForeignKey("set.id"), nullable=False)
-    set_won = db.Column(db.Boolean)
+    set_won = db.Column(db.Boolean,default = False)
 
     player = db.relationship("Player", back_populates="stats")
     set = db.relationship("Set",back_populates="stats")
