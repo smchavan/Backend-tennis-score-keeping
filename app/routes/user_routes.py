@@ -30,10 +30,19 @@ def create_user():
     return make_response({"user_id":new_user.id},201)
     #return make_response(f"User {new_user.first_name} successfully created", 201)
 
+
 ## Get all users GET 
 # Code to retrieve all users from the database and return as a JSON response
 @users_bp.route("/", methods=["GET"])
 def get_all_users():
+    
+    email_input = request.args.get("email")  
+    print("email input",email_input)
+    user = db.session.query(User).filter_by(email=email_input).first()
+    print("user",user)  
+    if user:
+        return jsonify({'user_id': user.id})
+    
     user_query = User.query
     first_name_query = request.args.get("first_name")
     if first_name_query:
@@ -76,12 +85,9 @@ def update_user(user_id):
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
 
-    #new_user = User.from_dict(request_body)
-
     db.session.commit()
     user_response = user.to_dict()
     return jsonify(user_response),200
-
 
 ## DELETE user by user_id
 # Code to delete an existing user from the database by ID and return a JSON response
@@ -107,13 +113,11 @@ def add_new_match_to_user(user_id):
     new_match = Match(
             no_of_sets=request_body["no_of_sets"],
             no_of_gamesperset=request_body["no_of_gamesperset"],
-            #match_date=datetime.now(),
             match_name=request_body["match_name"],
             player_a_id=request_body["player_a_id"],
             player_b_id=request_body["player_b_id"],
             user_id=user_id
         )
-    #new_match = Match.from_dict(request_body)
     
     new_match.user = user
     print("new_match",new_match)
@@ -159,6 +163,7 @@ def get_all_matches_for_the_use(user_id):
         matches_response.append(match.to_dict())
     print("matches Response", matches_response)
     return jsonify(matches_response)
+
 ### Get All Players for a certain user who has created those
 # Code to retrieve all players from the database and return as a JSON response
 @users_bp.route('/<user_id>/players', methods=['GET'])
