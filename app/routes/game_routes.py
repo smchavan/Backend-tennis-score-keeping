@@ -81,7 +81,7 @@ def update_game(game_id):
 
         #game.game_winner=request_body["game_winner"]
         game.game_winner=game_done_game_winner(game)  #request_body["game_winner"] # 
-        game.game_done=True
+        
     except KeyError as key_error:
         abort(make_response({"details":f"Request body must include {key_error.args[0]}."}, 400))    
     
@@ -105,6 +105,7 @@ def game_done_game_winner(game):
         cur_player1 = validate_model(Player,player_a_id)
         player_a_name = cur_player1.first_name
         game.game_winner = player_a_name
+        game.game_done=True
         return player_a_name
     if game.player_b_score == 4 and game.player_a_score <= 3:
         player_b_id = cur_match.player_b_id
@@ -112,6 +113,7 @@ def game_done_game_winner(game):
         player_b_name = cur_player2.first_name
         print("player_b_name",player_b_name)
         game.game_winner = player_b_name
+        game.game_done=True
         return player_b_name 
 
 ### Update set or match based on game winner
@@ -137,7 +139,8 @@ def update_set_match_based_on_game_score(game):
 
     print("player a games won", cur_set.player_a_games_won)    
     print("player b games won", cur_set.player_b_games_won)
-
+    if cur_set.set_done == True:
+        print("Can not update the set which is already done")
     if cur_set.player_a_games_won == cur_match.no_of_gamesperset and cur_set.player_b_games_won < cur_match.no_of_gamesperset:
         cur_set.set_winner = player_a_name
         cur_set.set_done = True
