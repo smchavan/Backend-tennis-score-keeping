@@ -100,6 +100,7 @@ def create_stat_for_player_after_set_done(set_id):
     request_body = request.get_json()
     set = validate_model(Set,set_id)
     player = validate_model(Player,request_body["player_id"])
+    temp_set_won = False
     if set.set_winner == player.first_name:
         temp_set_won = True
     new_stat = Stat(
