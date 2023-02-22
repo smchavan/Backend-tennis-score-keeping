@@ -19,8 +19,11 @@ def create_game():
     )
     db.session.add(new_game)
     db.session.commit()
+    game_response = new_game.to_dict()
+    #print("game_response.game_winner",game_response.game_winner)
+    return jsonify(game_response),200
 
-    return make_response(f"Game1 {new_game.game_number} successfully created", 201)
+    #return make_response(f"Game1 {new_game.game_number} successfully created", 201)
 
 ### Get All games
 # Code to retrieve all games from the database and return as a JSON response
