@@ -119,9 +119,10 @@ def add_new_set_to_match(match_id):
 
     db.session.add(new_set)
     db.session.commit()
+    set_response = new_set.to_dict()
+    return jsonify(set_response),200
 
-
-    return make_response({"Set_id":new_set.id},201)
+    #return make_response({"Set_id":new_set.id},201)
 
 @matchs_bp.route('/<match_id>/sets', methods=['GET'])
 def get_all_sets_for_the_match(match_id):
