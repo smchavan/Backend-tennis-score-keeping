@@ -42,7 +42,7 @@ Use `ls` to confirm there's a new project folder
 4. Move your location into this project folder
 
 ```bash
-$ cd viewing-party
+$ cd Backend-tennis-score-keeping
 ```
 
 5. Create a virtual environment named `venv` for this project:
@@ -73,11 +73,10 @@ Summary of one-time project setup:
 
 - [ ] `cd` into your `projects` folder
 - [ ] Clone the project onto your machine
-- [ ] `cd` into the `viewing-party` folder
+- [ ] `cd` into the `Backend-tennis-score-keeping` folder
 - [ ] Create the virtual environment `venv`
 - [ ] Activate the virtual environment `venv`
 - [ ] Install the dependencies with `pip`
-
 
 ## Github Setup
 
@@ -89,13 +88,12 @@ Summary of one-time project setup:
     * Push commits before switching driver
     * Pull before starting to drive
 
-## Guidelines for Pair-Programming
-
-- The driver is the person who is at the keyboard and mouse
-- The navigator is the person who is thinking out loud, actively collaborating with the driver about the next step, and helping guide the development
-- Trade-off driver and navigator roles often, at least daily, or every hour for longer work sessions.
-- Take time to make sure you're on the same page
-
+## ERD for the project
+ https://drive.google.com/file/d/1HfrKYCNisBVDIIxI-FUXMm36QxXp4nsm/view?usp=sharing
+## Endpoint Documents for the project for Sample request and response Bodies
+https://docs.google.com/document/d/1pN75cD_Cc_7sv7mDxHbIkN-oYhhEofJXBM8PsI6oQWo/edit?usp=sharing
+## API Document With CRUD endpoint table
+https://docs.google.com/spreadsheets/d/1oZAXevK7zXG4Id6_c5rvnNiWDYDM4FFPTxiEg47gfH0/edit?usp=share_link
 ## Project Directions
 
 - Write all the models for 
@@ -107,12 +105,34 @@ Summary of one-time project setup:
      * stat
      * player_match
  - Write all the CRUD endpoints for all the models 
+ - Write/Create nested endpoints like 
+    * A user creating a match
+    * A user creating players
+    * Adding a set to a match
+    * Adding a game to a set
+    * Adding stats for the two players for a set
+    * Getting all the matches created by the user
+    * Getting all the players created by the user
+    * Getting all the sets of a match
+    * Getting all games of a set
+    * Getting all stats for a player
+    * Getting all stats for a set
+    
 
 #### Database Setup/Update
 
 1. Pull down all new git commits
 1. Activate the virtual environment
 1. Create the database `tennis_development`
-2. Run `flask db migrate`
-3. Run `flask db upgrade`
-4. Run `flask run` to confirm that the API is running as expected
+2. Create the database `tennis_test`
+3. Run `flask db migrate`
+4. Run `flask db upgrade`
+5. Run `flask run` to confirm that the API is running as expected
+
+
+## Guidelines for Pair-Programming
+
+- The driver is the person who is at the keyboard and mouse
+- The navigator is the person who is thinking out loud, actively collaborating with the driver about the next step, and helping guide the development
+- Trade-off driver and navigator roles often, at least daily, or every hour for longer work sessions.
+- Take time to make sure you're on the same page
