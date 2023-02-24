@@ -1,8 +1,11 @@
-# Backend-tennis-score-keeping
-
+# Backend-for TennisPal (tennis-score-keeping app)
+This Backend is developed using Flask and SQLAlchemy and Postgres Database
+This deployed backend can be found here https://tennis-pal-backend.herokuapp.com 
+## Front End can be found here 
+## TennisPal
+A ReactJS, web based tennis score-keeping tracker. Access [here](https://tennispal.herokuapp.com).
 
 ## Goal
-
 
 * Improve our understanding of Flask & SQL Alchemy with repetition
 
@@ -28,8 +31,6 @@ $ cd ~/Developer/projects
 ```
 
 2. In Github click on the "Fork" button in github and fork the repository to your Github account.  This will make a copy of the project in your github account. 
-
-![Fork Button](images/fork.png)
 
 3. "Clone" (download a copy of this project) into your projects folder. This command makes a new folder called `viewing-party`, and then puts the project into this new folder.  Make sure you are cloning from your copy of the project and not the class version (ada-cX).
 
@@ -87,13 +88,16 @@ Summary of one-time project setup:
     * Make regular commits
     * Push commits before switching driver
     * Pull before starting to drive
+    * Work on a separate branch
+    * Make Pull Requests and have it tested by your project partner and then Merge to the main branch
 
 ## ERD for the project
- https://drive.google.com/file/d/1HfrKYCNisBVDIIxI-FUXMm36QxXp4nsm/view?usp=sharing
+ https://drive.google.com/file/d/1HfrKYCNisBVDIIxI-FUXMm36QxXp4nsm/view?usp=share_link
 ## Endpoint Documents for the project for Sample request and response Bodies
 https://docs.google.com/document/d/1pN75cD_Cc_7sv7mDxHbIkN-oYhhEofJXBM8PsI6oQWo/edit?usp=sharing
 ## API Document With CRUD endpoint table
 https://docs.google.com/spreadsheets/d/1oZAXevK7zXG4Id6_c5rvnNiWDYDM4FFPTxiEg47gfH0/edit?usp=share_link
+
 ## Project Directions
 
 - Write all the models for 
