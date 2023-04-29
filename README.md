@@ -80,7 +80,7 @@ Summary of one-time project setup:
 
 ## Github Setup
 
-1. Choose one member to fork the Solar System API repo 
+1. Choose one member to fork the Tennis score keeping Backend API repo 
 1. Add all members to the forked repo as collaborators (through the repo settings)
 1. All group members should clone this new, forked, group repo and `cd` into it
 1. Discuss good git hygiene: 
