@@ -139,7 +139,7 @@ https://docs.google.com/spreadsheets/d/1oZAXevK7zXG4Id6_c5rvnNiWDYDM4FFPTxiEg47g
  - Set the environment variables for Heroku
  - Setup and initialize the database in Heroku via the CLI
  - Verify
- ### Folowwing Commands can be reffered from your terminal in mac
+ ### Following Commands can be reffered from your terminal in mac
  - $ heroku login
  - We will use a Python package named gunicorn  to launch our Flask API on Heroku.
 gunicorn is capable of running Flask apps so that they can handle multiple simultaneous requests, which is very important for production web applications.
